@@ -65,6 +65,7 @@ let mapleader=","
 
 "==NERD tree settings
 map <silent> <F1> :NERDTreeToggle<CR>
+map <silent> <F2> :NERDTreeToggle<CR>
 cmap w!! %!sudo tee>/dev/null %
 
 "==molokai
