@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 set -e
 
+#vundle_url=https://github.com/gmarik/vundle.git
+vundle_url=https://github.com/VundleVim/Vundle.vim.git
+dotfile=$(readlink -f $(dirname $0))/dot.vimrc
+vundle_root=~/.vim/bundle #/Vundle.vim
+
 case $(os_type) in
 mac)
+  echo skip: brew install vim
   ;;
 linux) # ubuntu
   #* vim(tiny) not support system paste/copy, using vim-gnome instead
@@ -13,14 +19,13 @@ linux) # ubuntu
   ;;
 esac
 
-dotfile=$(readlink -f $(dirname $0))/dot.vimrc
-
 echo == use vundle to manage vim plugin
-[ -d ~/.vim/bundle ] || { 
-  mkdir -p ~/.vim/bundle
-  git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+[ -d $vundle_root ] || { 
+  mkdir -p $vundle_root
+  cd $vundle_root
+  git clone $vundle_url
 }
 
 ln -sb $dotfile ~/.vimrc && echo Make a link ~/.vimrc to $dotfile
-vim +BundleInstall +qall
+vim +PluginInstall +qall
 echo ==Has set vim
