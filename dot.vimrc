@@ -38,13 +38,13 @@ Plugin 'molokai' " color solution
 " Plugin 'FuzzyFinder'
 
 " ===plugin on github
+Plugin 'rking/ag.vim'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-rails.git'
 " Plugin 'Lokaltog/vim-easymotion'
 " Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Plugin 'tpope/vim-fugitive'
-" Plugin 'tpope/vim-rails.git'
 " Plugin 'rodjek/vim-puppet.git'
-" Plugin 'scrooloose/nerdcommenter'
-Plugin 'rking/ag.vim'
 " :Ag search_str
 " let g:agprg="/usr/bin/ag --column"
 
@@ -110,21 +110,28 @@ set expandtab
 " system clipboard
 set clipboard=unnamed
 
-" ctrl + c
+" ctrl + c to copy
 vmap  <C-c> "+y
-" ctrl + x
+" ctrl + x to cut
 vmap <C-x> "+x
 " ctrl + v
 "nnoremap <C-v> "+gP 
+" use commands + v
 
 " insert date 
 " :iab <expr> dts strftime("%c")
 :nnoremap <F9> "=strftime("%Y-%m-%d %H:%M")<CR>P
 :inoremap <F9> <C-R>=strftime("%Y-%m-%d %H:%M")<CR>
-:nnoremap <F10> "=strftime("%Y-%m-%d %H:%M")<CR>P
-:inoremap <F10> <C-R>=strftime("%Y-%m-%d %H:%M")<CR>
+" :nnoremap <F10> "=strftime("%Y-%m-%d %H:%M")<CR>P
+" :inoremap <F10> <C-R>=strftime("%Y-%m-%d %H:%M")<CR>
 
 "==NERD tree settings
 map <silent> <F1> :NERDTreeToggle<CR>
 map <silent> <F2> :NERDTreeToggle<CR>
 cmap w!! %!sudo tee>/dev/null %
+
+" 按行号选择大块代码
+" :3,204Vis
+command! -range Vis call setpos('.', [0,<line1>,0,0]) |
+          \ exe "normal V" |
+          \ call setpos('.', [0,<line2>,0,0])
